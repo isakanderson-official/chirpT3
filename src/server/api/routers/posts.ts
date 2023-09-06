@@ -6,10 +6,7 @@ import { Redis } from "@upstash/redis/nodejs";
 import { z } from "zod";
 
 import { createTRPCRouter, privateProcedure, publicProcedure } from "~/server/api/trpc";
-
-const filterUserForClient = (user: User) => {
-    return { id: user.id, username: user.username, profilePicture: user.imageUrl }
-}
+import { filterUserForClient } from "~/server/helpers/filterUserForClient";
 
 const ratelimit = new Ratelimit({
     redis: Redis.fromEnv(),
