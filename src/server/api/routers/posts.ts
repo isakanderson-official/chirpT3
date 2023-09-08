@@ -14,8 +14,6 @@ const addUserDataToPosts = async (posts: Post[]) => {
         limit: 100,
     })).map(filterUserForClient);
 
-    console.log(users)
-
     return posts.map((post) => {
         const author = users.find((user) => user.id === post.authorId)
         if (!author) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Author for post not found" })
@@ -37,6 +35,14 @@ const ratelimit = new Ratelimit({
 });
 
 export const postsRouter = createTRPCRouter({
+
+    getById: publicProcedure.input(z.object({ id: z.string() })).query(async ({ ctx, input }) => {
+        const post = await ctx.prisma.post.findUnique({ where: { id: input.id } })
+        if (!post) throw new TRPCError({ code: "NOT_FOUND" })
+
+        return (await addUserDataToPosts([post]))[0]
+    }),
+
     getAll: publicProcedure.query(async ({ ctx }) => {
         const posts = await ctx.prisma.post.findMany({
             take: 100,
