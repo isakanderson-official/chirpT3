@@ -6,6 +6,22 @@ body {
   @apply bg-black text-slate-100;
 
   overscroll-behavior: none;
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #474747;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #c2c2c2;
+    border-radius: 5px;
+  }
 }
 
 @layer utilities {
