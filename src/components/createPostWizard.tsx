@@ -20,8 +20,10 @@ export const CreatePostWizard = () => {
       const errorMessage = e.data?.zodError?.fieldErrors.content;
       if (errorMessage?.[0]) {
         toast.error(errorMessage[0]);
+      } else if (e.message) {
+        toast.error(e.message);
       } else {
-        toast.error("Failed to post! Please try again later...");
+        toast.error("Something went wrong");
       }
     },
   });
@@ -52,7 +54,7 @@ export const CreatePostWizard = () => {
           }
         }}
       />
-      {input !== "" && !isPosting && (
+      {!isPosting && (
         <button onClick={() => mutate({ content: input })}>Post</button>
       )}
       {isPosting && (

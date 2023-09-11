@@ -56,11 +56,13 @@ export const postsRouter = createTRPCRouter({
     })).query(({ ctx, input }) => ctx.prisma.post.findMany({ where: { authorId: input.userId }, take: 100, orderBy: { createdAt: "desc" } }).then(addUserDataToPosts)),
 
     create: privateProcedure.input(z.object({
-        content: z.string().emoji("Only emojies are allowed").min(1).max(280)
+        content: z.string().min(1, 'Please provide an emoji').emoji("Only emojies are allowed").max(5, "Please provide less than 6 emojies")
     })).mutation(async ({ ctx, input }) => {
         const authorId = ctx.userId;
         const { success } = await ratelimit.limit(authorId)
-        if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" })
+
+        // If the user has reached the rate limit, throw an error
+        if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS", message: "You have reached your sending limit, please try again in 1 minute" })
 
         const post = await ctx.prisma.post.create({
             data: {
