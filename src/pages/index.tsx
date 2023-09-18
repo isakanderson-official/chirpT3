@@ -11,8 +11,6 @@ dayjs.extend(relativeTime);
 export default function Home() {
   const { isLoaded: userLoaded, isSignedIn } = useUser();
 
-  // Start fetching asap, will used the cached data later.
-  api.posts.getAll.useQuery();
 
   if (!userLoaded) return <div />;
 
