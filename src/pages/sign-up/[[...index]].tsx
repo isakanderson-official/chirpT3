@@ -25,7 +25,7 @@ export default function Page() {
           routing="path"
           signInUrl="/sign-in"
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-          redirectUrl={`${origin}/${content ? `?content=${content}` : `''`}`}
+          redirectUrl={`${origin}/${content ? `?content=${content}` : ``}`}
         />
       )}
     </main>
