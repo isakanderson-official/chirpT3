@@ -11,9 +11,14 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <ClerkProvider {...pageProps}>
       <Head>
-        <title>Chrip</title>
-        <meta name="description" content="☁️" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>{`Isak's T3 App`}</title>
+        <meta name="description" content="😉" />
+        <meta property="og:image" content="/icon.png" />
+        <meta
+          property="og:description"
+          content="Are you ready to take your emoji game to the next level? Look no further! Our Next.js Stack test application is the perfect playground for emoji enthusiasts and developers alike."
+        />
+        <link rel="icon" href="/icon.png" />
       </Head>
       <Toaster position="bottom-center" />
       <Component {...pageProps} />
