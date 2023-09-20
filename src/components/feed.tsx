@@ -10,7 +10,7 @@ export const Feed = () => {
   if (!data) return <div>Something went wrong</div>;
 
   return (
-    <div className="flex flex-col overflow-y-scroll">
+    <div className="feed flex shrink flex-col overflow-y-auto">
       {[...data]?.map((fullPost) => (
         <PostView {...fullPost} key={fullPost.post.id} />
       ))}

@@ -60,7 +60,7 @@ export const CreatePostWizard = () => {
   // if (!user) return null;
 
   return (
-    <div className="flex w-full gap-3 ">
+    <div className="flex w-full gap-3 border-b border-slate-400 p-4">
       {!!user && (
         <Image
           src={user.imageUrl}
