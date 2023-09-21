@@ -9,10 +9,7 @@ export default function Page() {
   const [origin, setOrigin] = useState("");
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const urlOrigin = window.location.origin;
-      setOrigin(urlOrigin);
-    }
+    setOrigin(window.location.origin);
   }, []);
 
   return (
